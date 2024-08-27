@@ -37,4 +37,19 @@ public class ProductController {
         return new ResponseEntity<>(productService.addProduct(productRequest), HttpStatus.OK);
     }
 
+    @PutMapping
+    public ResponseEntity<APIResponse<List<ProductResponse>>> updateProduct(
+            @PathVariable Long productId,
+            @RequestBody ProductRequest productRequest
+    ){
+        return new ResponseEntity<>(productService.updateProduct(productId, productRequest), HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<APIResponse<List<ProductResponse>>> deleteProduct(
+            @PathVariable Long productId
+    ){
+        return new ResponseEntity<>(productService.deleteProduct(productId), HttpStatus.OK);
+    }
+
 }
