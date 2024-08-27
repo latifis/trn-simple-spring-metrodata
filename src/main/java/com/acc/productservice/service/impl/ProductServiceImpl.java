@@ -8,6 +8,7 @@ import com.acc.productservice.model.response.ProductResponse;
 import com.acc.productservice.model.mapper.ProductMapper;
 import com.acc.productservice.repository.ProductRepository;
 import com.acc.productservice.service.ProductService;
+import com.acc.productservice.util.ObjectValidator;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final ObjectValidator<ProductRequest> objectValidator;
 
     @Override
     public APIResponse findAllProduct() {
@@ -67,6 +69,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public APIResponse addProduct(ProductRequest productRequest) {
+        List<String> validate = objectValidator.validate(productRequest);
+        if (!validate.isEmpty()){
+            return productMapper.mapErrorToApiResponseDto(validate);
+        }
+        Product product = productMapper.requestDtoToModel(productRequest);
+        return productMapper.mapToApiResponseDto(
+                productRepository.save(product)
+        );
 //        Product product = new Product();
 //        product.setName(productRequest.getName());
 //        product.setPrice(productRequest.getPrice());
@@ -80,16 +90,21 @@ public class ProductServiceImpl implements ProductService {
 //        productResponse.setPrice(result.getPrice());
 //        productResponse.setQuantity(result.getQuantity());
 
-        Product product = productMapper.requestDtoToModel(productRequest);
-        return productMapper.mapToApiResponseDto(
-                productRepository.saveAndFlush(product)
-        );
+//        Product product = productMapper.requestDtoToModel(productRequest);
+//        return productMapper.mapToApiResponseDto(
+//                productRepository.saveAndFlush(product)
+//        );
     }
 
     @Override
     public APIResponse updateProduct(Long id, ProductRequest productRequest) {
         // Check Data by ID
         findProductById(id);
+
+        List<String> validate = objectValidator.validate(productRequest);
+        if (!validate.isEmpty()){
+            return productMapper.mapErrorToApiResponseDto(validate);
+        }
 
         // Mapping ProductRequest to Product
         Product product = productMapper.requestDtoToModel(productRequest);
@@ -109,6 +124,7 @@ public class ProductServiceImpl implements ProductService {
 //        productResponse.setPrice(result.getPrice());
 //        productResponse.setQuantity(result.getQuantity());
 
+        product.setId(id);  // agar bisa update
         return productMapper.mapToApiResponseDto(
                 productRepository.saveAndFlush(product)
         );
