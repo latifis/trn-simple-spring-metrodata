@@ -10,4 +10,5 @@ public interface ProductService {
     APIResponse addProduct(ProductRequest productRequest);
     APIResponse updateProduct(Long id, ProductRequest productRequest);
     APIResponse deleteProduct(Long id);
+
 }

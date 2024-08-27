@@ -1,21 +1,18 @@
 package com.acc.productservice.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class APIResponse<T> {
-    private String status = CommonStatus.SUCCESS.name(); // SUCCESS or FAILED
-    private List<String> message = new ArrayList<>();// Error Message[Java Validation]
+public class APIResponse<T>{
+
+    private String status;
+    private List<String> message = new ArrayList<String>();
     private T data;
 
     public APIResponse(T data) {
+        this.status = CommonStatus.SUCCESS.name();
         this.data = data;
     }
 

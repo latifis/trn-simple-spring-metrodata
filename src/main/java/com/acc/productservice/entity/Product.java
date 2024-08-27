@@ -10,11 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_product")
-public class Product extends AuditingEntity<String> {
+public class Product extends AuditingEntity<String>{
 
     @Id
-    @SequenceGenerator(name = "product_sequence", sequenceName = "product_sequence")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_sequence")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false, length = 30)
@@ -25,5 +24,7 @@ public class Product extends AuditingEntity<String> {
 
     @Column(nullable = false)
     private int quantity;
+
+//    private Category category;
 
 }
