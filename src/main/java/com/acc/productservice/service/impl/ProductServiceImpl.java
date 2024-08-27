@@ -1,6 +1,7 @@
 package com.acc.productservice.service.impl;
 
 import com.acc.productservice.model.APIResponse;
+import com.acc.productservice.model.request.ProductRequest;
 import com.acc.productservice.repository.ProductRepository;
 import com.acc.productservice.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -18,22 +19,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public APIResponse findProductById() {
+    public APIResponse findProductById(Long id) {
         return null;
     }
 
     @Override
-    public APIResponse addProduct() {
+    public APIResponse addProduct(ProductRequest productRequest) {
         return null;
     }
 
     @Override
-    public APIResponse updateProduct() {
+    public APIResponse updateProduct(Long id, ProductRequest productRequest) {
         return null;
     }
 
     @Override
-    public APIResponse deleteProduct() {
+    public APIResponse deleteProduct(Long id) {
         return null;
     }
 }
