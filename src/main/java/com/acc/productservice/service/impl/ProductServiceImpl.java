@@ -136,4 +136,16 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteById(id);
         return product;
     }
+
+    @Override
+    public APIResponse<Void> checkAvailable(Long id, int quantity) {
+//        return new APIResponse<Void>();
+        return null;
+    }
+
+    @Override
+    public APIResponse<Void> reduceProduct(Long id, int quantity) {
+//        APIResponse<Pro>
+        return null;
+    }
 }

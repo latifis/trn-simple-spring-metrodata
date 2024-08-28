@@ -21,7 +21,7 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public ResponseEntity<APIResponse<List<Product>>> getAllProduct() {
+    public ResponseEntity<APIResponse<List<ProductResponse>>> getAllProduct() {
         return ResponseEntity.ok(productService.findAllProduct());
     }
 
