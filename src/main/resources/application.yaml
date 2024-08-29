@@ -20,13 +20,8 @@ spring:
         format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-  cloud:
-    config:
-      server:
-        git:
-          uri: https://github.com/ACC-Brijalan-Training/config-api.git
-          clone-on-start: true
-          default-label: main
+  config:
+    import: configserver:http://localhost:9296
 
 #eureka:
 #  instance:
